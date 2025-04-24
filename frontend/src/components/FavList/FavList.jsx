@@ -23,7 +23,9 @@ function FavList() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/users/${user.id}/favoritos`,
+          `${
+            import.meta.env.VITE_API_URL
+          }/users/${user.id}/favoritos`,
           {
             headers: {
               Authorization: user.token,

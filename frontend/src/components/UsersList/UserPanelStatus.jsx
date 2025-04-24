@@ -13,7 +13,9 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:3001/admin/${userId}/status`, {
+      const res = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/admin/${userId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

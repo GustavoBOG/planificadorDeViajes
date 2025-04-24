@@ -16,7 +16,9 @@ const CommentList = ({ comment, comments, setComments }) => {
   // Función para guardar los cambios de un comentario
   const handleSave = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/ratings/${comment.id}`, {
+      const res = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/ratings/${comment.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +57,9 @@ const CommentList = ({ comment, comments, setComments }) => {
   // Función para eliminar un comentario
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/ratings`, {
+      const res = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/ratings`, {
         method: 'DELETE',
         headers: {
           Authorization: token,
@@ -113,7 +117,9 @@ const CommentList = ({ comment, comments, setComments }) => {
           <img
             src={
               comment.avatar
-                ? `http://localhost:3001/uploads/${comment.avatar}`
+                ? `${
+                  import.meta.env.VITE_API_URL
+                }/uploads/${comment.avatar}`
                 : '/default-avatar.png' // imagen predeterminada
             }
             alt={`${comment.username}'s avatar`}

@@ -13,7 +13,9 @@ function AccountActivation() {
   const activateAccount = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/users/validate/${registrationCode}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/users/validate/${registrationCode}`,
         {
           method: 'GET',
           headers: {

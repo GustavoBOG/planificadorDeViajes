@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import sendMailUtils from '../../utils/sendEmailUtil.js';
@@ -38,7 +37,7 @@ export const insertUserService = async (
                 haciendo click en el siguiente enlace:
               </p>
               <p>
-                <a href="http://localhost:5173/users/validate/${registrationCode}">Activar Cuenta</a>
+                <a href="${FRONT_END_PORT}/users/validate/${registrationCode}">Activar Cuenta</a>
                         
                 Ya Puedes empezar a disfrutar de nuestros servicios y 🛩️ por el mundo entero.
               </p>

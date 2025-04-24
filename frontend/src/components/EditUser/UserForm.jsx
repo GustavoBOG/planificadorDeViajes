@@ -28,7 +28,9 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
 
       // Si hay un avatar, actualiza el avatar en el padre
       if (initialData.avatar) {
-        setAvatarAct(`http://localhost:3001/uploads/${initialData.avatar}`);
+        setAvatarAct(`${
+          import.meta.env.VITE_API_URL
+        }/${initialData.avatar}`);
       }
     }
   }, [initialData, setAvatarAct]);

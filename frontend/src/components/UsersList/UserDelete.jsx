@@ -12,7 +12,9 @@ export const UserDelete = ({ userId, setUserList }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:3001/admin/${userId}`, {
+      const res = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/admin/${userId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `${user.token}`,

@@ -19,7 +19,9 @@ function PasswordReset() {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/users/password/${code}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/users/password/${code}`,
         {
           method: 'PUT',
           headers: {

@@ -77,7 +77,9 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       }
 
       // Realiza la solicitud para subir el avatar.
-      const response = await fetch('http://localhost:3001/users/avatar', {
+      const response = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/users/avatar`, {
         method: 'PUT',
         body: formData,
         headers: {

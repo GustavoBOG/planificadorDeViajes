@@ -6,7 +6,9 @@ function DeleteFavoriteButton({ flightId, user, onRemove }) {
     const handleDelete = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/flights/favoritos/${flightId}`,
+          `${
+            import.meta.env.VITE_API_URL
+          }/flights/favoritos/${flightId}`,
           {
             method: 'DELETE',
             headers: {

@@ -9,7 +9,9 @@ export const UserInfo = () => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
-  const wonderUser = useFetch('http://localhost:3001/admin/users');
+  const wonderUser = useFetch(`${
+    import.meta.env.VITE_API_URL
+  }/admin/users`);
 
   useEffect(() =>{
     if (wonderUser && wonderUser.data && Array.isArray(wonderUser.data.users)){
@@ -33,7 +35,9 @@ export const UserInfo = () => {
   // const toggleAccordion = () => {
   //   setIsOpen(!isOpen);
   // };
-  const avatarUrl = `http://localhost:3001/users/getAvatar/${id}`
+  const avatarUrl = `${
+    import.meta.env.VITE_API_URL
+  }/users/getAvatar/${id}`
   return (
     <div className='mt-20 mb-10 top-5 p-5 rounded-2xl w-full max-w-xs sm:max-w-md mx-auto relative bg-[#7278a4]'>
       <h1 className='text-center bg-[#515a9b] text-white font-manrope text-base sm:text-lg font-bold' >{user.username}</h1>

@@ -31,7 +31,9 @@ const EditUser = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3001/users/profile', {
+        const response = await fetch(`${
+          import.meta.env.VITE_API_URL
+        }/users/profile`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -45,7 +47,9 @@ const EditUser = () => {
         if (responseData.status === 'ok') {
           const userData = responseData.data;
           setUserData(userData);
-          setAvatarAct(`http://localhost:3001/uploads/${userData.avatar}`);
+          setAvatarAct(`${
+            import.meta.env.VITE_API_URL
+          }/uploads/${userData.avatar}`);
           setLoading(false);
         } else {
           toast.error(responseData.message || 'Error al obtener datos', {
@@ -69,7 +73,9 @@ const EditUser = () => {
   const handleFormSubmit = async (formData) => {
     try {
       const token = user?.token;
-      const response = await fetch(`http://localhost:3001/users/edit/${userData.id}`, {
+      const response = await fetch(`${
+        import.meta.env.VITE_API_URL
+      }/users/edit/${userData.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +105,9 @@ const EditUser = () => {
   };
 
   const handleAvatarUpdate = (newAvatarUrl) => {
-    setAvatarAct(`http://localhost:3001/uploads/${newAvatarUrl}`);
+    setAvatarAct(`${
+      import.meta.env.VITE_API_URL
+    }/uploads/${newAvatarUrl}`);
   };
 
   if (loading) {

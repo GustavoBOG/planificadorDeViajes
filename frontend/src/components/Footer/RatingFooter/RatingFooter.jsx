@@ -10,7 +10,9 @@ function RatingBanner() {
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const response = await fetch('http://localhost:3001/ratings');
+        const response = await fetch(`${
+          import.meta.env.VITE_API_URL
+        }/ratings`);
         if (!response.ok) {
           throw new Error('Error al obtener la valoración');
         }
