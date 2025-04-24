@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import sendMailUtils from '../../utils/sendEmailUtil.js';
+import 'doteenv/config';
 
 export const insertUserService = async ( 
   email,
@@ -12,7 +13,7 @@ export const insertUserService = async (
   registrationCode
 ) => {
   try {
-
+    const {FRONT_END_PORT} = process.env;
     // Obtenemos la conexión con la base de datos.
     const pool = await getPool();
     //Comprobamos si existe el usuario previamente.
