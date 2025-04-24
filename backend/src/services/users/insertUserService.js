@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import sendMailUtils from '../../utils/sendEmailUtil.js';
-import 'doteenv/config';
+import 'dotenv/config';
 
 export const insertUserService = async ( 
   email,
