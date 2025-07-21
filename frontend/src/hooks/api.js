@@ -21,7 +21,7 @@ import useFetch from './useFetch';
 // };
 
 export const useCityAndAirportSearch = (parameter) => {
-  const content = useFetch(`/city-and-airport-search/:${parameter}`) || {
+  const content = useFetch(`/city-and-airport-search/${parameter}`) || {
     data: [],
   };
   return content;
