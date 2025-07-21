@@ -19,6 +19,7 @@ server.use(morgan('dev'));
 
 // Middleware conexión entre cliente y servidor.
 server.use(cors());
+// console.log("CORS middleware aplicado!");
 
 // Middleware parseo del body en formato JSON
 server.use(express.json());
