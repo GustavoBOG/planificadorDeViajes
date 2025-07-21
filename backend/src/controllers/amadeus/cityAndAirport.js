@@ -27,7 +27,7 @@ const cityAndAirportSearch = async (req, res, next) => {
   try {
     // const parameter = req.params.parameter;
     const parameter = req.params.query;
-
+    console.log(`[Amadeus Debug] Keyword enviado a la API de Amadeus: "${parameter}"`)
     const response = await amadeus.referenceData.locations.get({
       keyword: parameter,
       subType: Amadeus.location.any,
