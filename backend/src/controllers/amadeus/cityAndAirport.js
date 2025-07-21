@@ -40,8 +40,6 @@ const cityAndAirportSearch = async (req, res, next) => {
     // res.send(response.result.data);
   } catch (error) {
     // ver si este catch esté imprimiendo el error completo
-
-    
     console.error('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     console.error('ERROR EN cityAndAirportSearch (Amadeus API): ', error);
     console.error('Stack Trace: ', error.stack);
