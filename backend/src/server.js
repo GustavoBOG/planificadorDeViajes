@@ -18,12 +18,7 @@ const server = express();
 server.use(morgan('dev'));
 
 // Middleware conexión entre cliente y servidor.
-server.use(cors({
-  origin: 'https://planificador-de-viajes.vercel.app', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true 
-}));
+server.use(cors());
 
 // Middleware parseo del body en formato JSON
 server.use(express.json());
