@@ -38,6 +38,7 @@ const amadeus = new Amadeus({
     : 'https://api.amadeus.com',
 });
 
+
 export default amadeus;
 
 
