@@ -1,66 +1,45 @@
 import 'dotenv/config';
 import mysql from 'mysql2/promise';
 
-// Determinar si estamos en producción o desarrollo
 const isProduction = process.env.NODE_ENV === 'production';
-
 let pool;
 
 const getPool = async () => {
   try {
     if (!pool) {
-      if (isProduction) {
-        // En Railway, usamos directamente MYSQL_URL
-        console.log('Conectando en entorno de producción (Railway)');
+      const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-        if (!process.env.MYSQL_URL) {
-          throw new Error(
-            'La variable MYSQL_URL no está definida en el entorno de producción'
-          );
-        }
+      const connectionOptions = {
+        connectionLimit: 10,
+        host: DB_HOST || 'localhost',
+        port: DB_PORT || 3306,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_NAME,
+        timezone: 'Z',
+        // Configuración SSL para TiDB Cloud en producción
+        ssl: isProduction ? { rejectUnauthorized: true } : false
+      };
 
-        // Crear el pool usando la URL completa de conexión
-        pool = mysql.createPool(process.env.MYSQL_URL);
-      } else {
-        // En desarrollo local, usamos las variables individuales del .env
-        console.log('Conectando en entorno de desarrollo local');
-
-        const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
-
-        console.log('DB_HOST:', DB_HOST);
-        console.log('DB_PORT:', DB_PORT);
-        console.log('DB_USER:', DB_USER);
-        console.log('DB_PASSWORD:', DB_PASSWORD ? '****' : 'NO PASSWORD');
-        console.log('DB_NAME:', DB_NAME);
-
-        // En desarrollo, intentamos crear la base de datos si no existe
+      // Si no estamos en producción, creamos la base de datos si no existe
+      if (!isProduction) {
         const poolTemp = mysql.createPool({
           host: DB_HOST || 'localhost',
           port: DB_PORT || 3306,
           user: DB_USER,
           password: DB_PASSWORD,
         });
-
         await poolTemp.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
-
-        // Luego creamos el pool con la base de datos seleccionada
-        pool = mysql.createPool({
-          connectionLimit: 10,
-          host: DB_HOST || 'localhost',
-          port: DB_PORT || 3306,
-          user: DB_USER,
-          password: DB_PASSWORD,
-          database: DB_NAME,
-          timezone: 'Z',
-        });
+        await poolTemp.end(); // Cerrar conexión temporal
       }
-    }
 
+      pool = mysql.createPool(connectionOptions);
+    }
     return pool;
   } catch (error) {
-    console.log('Error al conectar a la base de datos:', error);
+    console.error('Error al conectar a la base de datos:', error); // Usar console.error para errores
     throw error;
   }
 };
-//temporal change , only for redeployment
+
 export default getPool;
